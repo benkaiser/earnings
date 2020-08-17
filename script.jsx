@@ -157,9 +157,10 @@ class Company extends React.Component {
 
 
 const COMPANY_LIST = [
-  'MSFT',
   'AAPL',
   'AMZN',
+  'FB',
+  'MSFT',
   'TSLA'
 ];
 

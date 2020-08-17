@@ -164,9 +164,10 @@ class CompanyScraper {
 }
 
 const COMPANY_LIST: string[] = [
-  'MSFT',
   'AAPL',
   'AMZN',
+  'FB',
+  'MSFT',
   'TSLA'
 ];
 COMPANY_LIST.forEach(ticker => {
