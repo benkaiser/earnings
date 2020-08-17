@@ -1,7 +1,8 @@
 import { Response } from 'got';
-import path from 'path';
+import path, { join } from 'path';
 import * as cheerio from 'cheerio';
 import moment from 'moment';
+import { writeFile } from 'jsonfile';
 const cached = require('cached-got');
 const { got } = cached(path.join(__dirname, 'cache.json'));
 
@@ -12,20 +13,8 @@ interface IEstimate {
 }
 
 interface IEstimateWithInfo extends IEstimate {
-  pre: {
-    oneDay: ITickerHistory;
-    twoDay: ITickerHistory;
-    threeDay: ITickerHistory;
-    oneWeek: ITickerHistory;
-    twoWeek: ITickerHistory;
-  };
-  post: {
-    oneDay: ITickerHistory;
-    twoDay: ITickerHistory;
-    threeDay: ITickerHistory;
-    oneWeek: ITickerHistory;
-    twoWeek: ITickerHistory;
-  };
+  pre: ITickerHistory[];
+  post: ITickerHistory[];
 }
 
 interface IQuote {
@@ -76,8 +65,18 @@ class CompanyScraper {
       const priceJson = this.processTickerPrices(priceResponse.body);
       const earnignsJson = this.processEarningsPage(earningsResponse.body);
       const earningsDecorated = this.correlateEarningsWithStockprice(priceJson, earnignsJson);
-      console.log(earningsDecorated.slice(0, 10));
+      this.writeFile(earningsDecorated);
+    }).catch((error: Error) => {
+      console.error(error);
     });
+  }
+
+  private writeFile(fullEarningsData: IEstimateWithInfo[]): void {
+    writeFile(join('..', 'data', this.ticker + '_full.json'), fullEarningsData);
+    const partialEarnings = fullEarningsData.filter(item => {
+      return new Date(item.date) > moment().subtract(5, 'years').toDate()
+    });
+    writeFile(join('..', 'data', this.ticker + '_partial.json'), partialEarnings);
   }
 
   private processEarningsPage(earningsRawHtml: string): IEstimate[] {
@@ -104,33 +103,35 @@ class CompanyScraper {
         timestamp: timestamp,
         date: moment(timestamp * 1000).format('YYYY-MM-DD'),
         index: index,
-        close: result.indicators.quote[0].close[index],
-        high: result.indicators.quote[0].high[index],
-        low: result.indicators.quote[0].low[index],
-        open: result.indicators.quote[0].open[index],
+        close: this.toCents(result.indicators.quote[0].close[index]),
+        high: this.toCents(result.indicators.quote[0].high[index]),
+        low: this.toCents(result.indicators.quote[0].low[index]),
+        open: this.toCents(result.indicators.quote[0].open[index]),
         volume: result.indicators.quote[0].volume[index],
       };
     });
   }
 
+  private toCents(fullNumber: number): number {
+    if (fullNumber === null) {
+      return fullNumber;
+    }
+    return Number(fullNumber.toFixed(2));
+  }
+
   private correlateEarningsWithStockprice(tickerPrices: ITickerHistory[], earningsJson: IEstimate[]): IEstimateWithInfo[] {
     return earningsJson.map((earning) => {
+      if (Number.isNaN(earning.estimated) || Number.isNaN(earning.reported)) {
+        return {
+          ...earning,
+          pre: [],
+          post: [],
+        };
+      };
       return {
         ...earning,
-        pre: {
-          oneDay: this.getPriceFor(tickerPrices, earning.date),
-          twoDay: this.getPriceFor(tickerPrices, earning.date, -1),
-          threeDay: this.getPriceFor(tickerPrices, earning.date, -2),
-          oneWeek: this.getPriceFor(tickerPrices, earning.date, -5),
-          twoWeek: this.getPriceFor(tickerPrices, earning.date, -10),
-        },
-        post: {
-          oneDay: this.getPriceFor(tickerPrices, earning.date, 1),
-          twoDay: this.getPriceFor(tickerPrices, earning.date, 2),
-          threeDay: this.getPriceFor(tickerPrices, earning.date, 3),
-          oneWeek: this.getPriceFor(tickerPrices, earning.date, 6),
-          twoWeek: this.getPriceFor(tickerPrices, earning.date, 11),
-        },
+        pre: [...Array(11)].map((_, index) => this.getPriceFor(tickerPrices, earning.date, -10 + index)),
+        post: [...Array(11)].map((_, index) => this.getPriceFor(tickerPrices, earning.date, index + 1))
       };
     });
   }
@@ -151,7 +152,9 @@ class CompanyScraper {
         return tickerPrices[i + daysAhead] || tickerNotFound;
       }
     }
-    console.log(`Unable to find ticker for date ${date} on symbol ${this.ticker}`);
+    if (new Date(date) < new Date()) {
+      console.log(`Unable to find ticker for date ${date} on symbol ${this.ticker}`);
+    }
     return tickerNotFound;
   }
 
@@ -162,8 +165,8 @@ class CompanyScraper {
 
 const COMPANY_LIST: string[] = [
   'MSFT',
-  // 'AAPL',
-  // 'AMZN',
+  'AAPL',
+  'AMZN',
 ];
 COMPANY_LIST.forEach(ticker => {
   new CompanyScraper(ticker).process();
