@@ -121,7 +121,7 @@ class CompanyScraper {
 
   private correlateEarningsWithStockprice(tickerPrices: ITickerHistory[], earningsJson: IEstimate[]): IEstimateWithInfo[] {
     return earningsJson.map((earning) => {
-      if (Number.isNaN(earning.estimated) || Number.isNaN(earning.reported)) {
+      if (!earning.estimated || !earning.reported) {
         return {
           ...earning,
           pre: [],
@@ -167,6 +167,7 @@ const COMPANY_LIST: string[] = [
   'MSFT',
   'AAPL',
   'AMZN',
+  'TSLA'
 ];
 COMPANY_LIST.forEach(ticker => {
   new CompanyScraper(ticker).process();
