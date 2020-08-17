@@ -70,7 +70,7 @@ class Company extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/data/${this.state.ticker}_partial.json`)
+    fetch(`data/${this.state.ticker}_partial.json`)
     .then(response => response.json())
     .then(data => {
       console.log(data);
