@@ -8,15 +8,14 @@ There is nothing magic here, just rounding up all the historical data for the ti
 ## Running locally
 
 ```
-cd scraper
 npm install
 npm start
-cd ../
-npx http-server
 ```
 
 Then browse to http://localhost:8080
 
 ## How do I add a new ticker?
 
-Add the new ticker in both `script.jsx` and `scraper/index.ts` in the `COMPANY_LIST` array. Currently only supporting after-hours earnings announcements.
+Add the new ticker to this file `shared/constants.jsx` in the `COMPANY_LIST` array. Currently only supporting after-hours earnings announcements.
+
+To add the data, run: `npm run scraper`
