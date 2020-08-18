@@ -17,7 +17,7 @@ export default function Header(): React.ReactElement {
             { COMPANY_LIST.map(company => {
               const className = window.location.hash.indexOf(company) > -1 ? 'active' : '';
               return (
-                <li className={ `nav-item ${className}` }>
+                <li key={ company } className={ `nav-item ${className}` }>
                   <Link className="nav-link" to={`${company}`}>{ company }</Link>
                 </li>
               )

@@ -1,5 +1,6 @@
-import { RouteComponentProps } from 'react-router-dom';
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { ResponsiveLine } from '@nivo/line'
 
 import IEstimateWithInfo from "../shared/IEstimateWithInfo";
 
@@ -55,23 +56,83 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
   renderData() {
     const filteredData = this.state.data.filter(row => row.estimated && row.reported);
     return (
-      <table className="table">
-        <thead>
-          <tr><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th>Earnings Move</th><th>Earnings Gap</th></tr>
-        </thead>
-        <tbody>
-          { filteredData.map(dataRow => (
-            <tr>
-              <td>{ dataRow.date }</td>
-              <td>{ dataRow.estimated }</td>
-              { this.actualEPS(dataRow) }
-              { this.earningsMove(dataRow) }
-              { this.openingGap(dataRow) }
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <>
+        <div className='chartContainer'>
+        <ResponsiveLine
+          data={this.chartData()}
+          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+          xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+          yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+              format: (tick) => -tick,
+              orient: 'bottom',
+              tickSize: 1,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: 'days until earnings',
+              legendOffset: 36,
+              legendPosition: 'middle'
+          }}
+          axisLeft={{
+              orient: 'left',
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: 'price relative to pre-earnings close',
+              legendOffset: -40,
+              legendPosition: 'middle'
+          }}
+          colors={{ scheme: 'nivo' }}
+          useMesh={true}
+          legends={[
+              {
+                  anchor: 'bottom-right',
+                  direction: 'column',
+                  justify: false,
+                  translateX: 100,
+                  translateY: 0,
+                  itemWidth: 80,
+                  itemHeight: 20,
+              }
+          ]}
+        />
+        </div>
+        <table className="table table-bordered">
+          <thead>
+            <tr><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th>Earnings Move</th><th>Earnings Gap</th></tr>
+          </thead>
+          <tbody>
+            { filteredData.map(dataRow => (
+              <tr key={ dataRow.date }>
+                <td>{ dataRow.date }</td>
+                <td>{ dataRow.estimated }</td>
+                { this.actualEPS(dataRow) }
+                { this.earningsMove(dataRow) }
+                { this.openingGap(dataRow) }
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
+  }
+
+  chartData() {
+    const filteredData = this.state.data.filter(row => row.estimated && row.reported).slice(0, 4);
+    return filteredData.map(earning => {
+      const allDays = earning.pre.concat(earning.post);
+      // end of day before earnings
+      const midPoint = earning.pre[earning.pre.length-1].close;
+      return {
+        id: earning.date,
+        data: allDays.map((day, index) => ({
+          x: index - 10,
+          y: day.close / midPoint * 100 - 100
+        }))
+      };
+    });
   }
 
   earningsMove(earnings: IEstimateWithInfo) {

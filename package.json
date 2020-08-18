@@ -12,6 +12,7 @@
   "author": "Benjamin Kaiser",
   "license": "MIT",
   "dependencies": {
+    "@nivo/line": "^0.62.0",
     "@types/cheerio": "^0.22.21",
     "@types/got": "^9.6.11",
     "@types/jsonfile": "^6.0.0",
