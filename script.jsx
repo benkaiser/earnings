@@ -61,19 +61,27 @@ class Home extends React.Component {
   }
 }
 
+const dataCache = {};
+
 class Company extends React.Component {
   constructor(props) {
     super(props);
+    const ticker = props.match.params.company;
     this.state = {
-      ticker: props.match.params.company
+      ticker,
+      data: dataCache[ticker]
     };
   }
 
   componentDidMount() {
+    if (this.state.data) {
+      return;
+    }
     fetch(`data/${this.state.ticker}_partial.json`)
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      dataCache[this.state.ticker] = data;
       this.setState({
         data
       });
