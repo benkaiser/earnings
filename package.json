@@ -4,7 +4,8 @@
   "description": "Earnings Scraper",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "scrape": "ts-node scraper/index.ts",
+    "build": "webpack --config ./src/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benjamin Kaiser",
@@ -18,10 +19,13 @@
     "got": "^11.5.1",
     "jsonfile": "^6.0.1",
     "moment": "^2.27.0",
+    "ts-loader": "^8.0.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   },
   "devDependencies": {
-    "@types/node": "^14.0.23"
+    "@types/node": "^14.0.23",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }
