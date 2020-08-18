@@ -1,3 +1,7 @@
+import IEstimate from '../shared/IEstimate';
+import IEstimateWithInfo from '../shared/IEstimateWithInfo';
+import ITickerHistory from '../shared/ITickerHistory';
+import { COMPANY_LIST } from '../shared/constants';
 import { Response } from 'got';
 import path, { join } from 'path';
 import * as cheerio from 'cheerio';
@@ -5,17 +9,6 @@ import moment from 'moment';
 import { writeFile } from 'jsonfile';
 const cached = require('cached-got');
 const { got } = cached(path.join(__dirname, 'cache.json'));
-
-interface IEstimate {
-  date: string;
-  estimated: number;
-  reported: number;
-}
-
-interface IEstimateWithInfo extends IEstimate {
-  pre: ITickerHistory[];
-  post: ITickerHistory[];
-}
 
 interface IQuote {
   close: number[],
@@ -34,17 +27,6 @@ interface IPriceJson {
       timestamp: Array<number>;
     }>;
   };
-}
-
-interface ITickerHistory {
-  timestamp: number;
-  date: string;
-  index: number;
-  close: number;
-  high: number;
-  open: number;
-  low: number;
-  volume: number;
 }
 
 console.log('- Started scrape');
@@ -72,11 +54,11 @@ class CompanyScraper {
   }
 
   private writeFile(fullEarningsData: IEstimateWithInfo[]): void {
-    writeFile(join('..', 'data', this.ticker + '_full.json'), fullEarningsData);
+    writeFile(join(__dirname, '..', 'data', this.ticker + '_full.json'), fullEarningsData);
     const partialEarnings = fullEarningsData.filter(item => {
       return new Date(item.date) > moment().subtract(5, 'years').toDate()
     });
-    writeFile(join('..', 'data', this.ticker + '_partial.json'), partialEarnings);
+    writeFile(join(__dirname, '..', 'data', this.ticker + '_partial.json'), partialEarnings);
   }
 
   private processEarningsPage(earningsRawHtml: string): IEstimate[] {
@@ -163,17 +145,6 @@ class CompanyScraper {
   }
 }
 
-const COMPANY_LIST: string[] = [
-  'AAPL',
-  'AMZN',
-  'FB',
-  'MSFT',
-  'TSLA'
-];
 COMPANY_LIST.forEach(ticker => {
   new CompanyScraper(ticker).process();
 });
-
-
-
-

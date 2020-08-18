@@ -4,8 +4,9 @@
   "description": "Earnings Scraper",
   "main": "index.ts",
   "scripts": {
-    "scrape": "ts-node scraper/index.ts",
-    "build": "webpack --config ./src/webpack.config.js",
+    "scraper": "ts-node --project scraper/tsconfig.json scraper/index.ts",
+    "build": "webpack --config src/webpack.config.js --watch",
+    "start": "npm run build & http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benjamin Kaiser",
@@ -14,18 +15,25 @@
     "@types/cheerio": "^0.22.21",
     "@types/got": "^9.6.11",
     "@types/jsonfile": "^6.0.0",
+    "@types/node": "^14.0.23",
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
     "cached-got": "^1.0.1",
     "cheerio": "^1.0.0-rc.3",
     "got": "^11.5.1",
+    "http-server": "^0.12.3",
     "jsonfile": "^6.0.1",
     "moment": "^2.27.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "ts-loader": "^8.0.2",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
-  },
-  "devDependencies": {
-    "@types/node": "^14.0.23",
+    "typescript": "^3.9.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
-  }
+  },
+  "devDependencies": {}
 }
