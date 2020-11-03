@@ -3,5 +3,7 @@ export const COMPANY_LIST: string[] = [
   'AMZN',
   'FB',
   'MSFT',
-  'TSLA'
+  'TSLA',
+  'DBX',
+  'PLTR'
 ];
