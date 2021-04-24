@@ -13,7 +13,10 @@ type ICompanyProps = RouteComponentProps<ICompanyRouteProps>;
 interface ICompanyState {
   ticker: string;
   data: IEstimateWithInfo[];
+  checkedMap: CheckMap;
 }
+
+type CheckMap = { [key: string]: boolean };
 
 const dataCache: { [key: string]: IEstimateWithInfo[] } = {};
 
@@ -23,7 +26,8 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
     const ticker = props.match.params.company;
     this.state = {
       ticker,
-      data: dataCache[ticker]
+      data: dataCache[ticker]?.filter(row => row.estimated && row.reported),
+      checkedMap: { 0: true, 1: true, 2: true, 3: true }
     };
   }
 
@@ -35,9 +39,10 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      dataCache[this.state.ticker] = data;
+      const filteredData = data.filter((row: IEstimateWithInfo) => row.estimated && row.reported);
+      dataCache[this.state.ticker] = filteredData;
       this.setState({
-        data
+        data: filteredData
       });
     });
   }
@@ -54,7 +59,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
   }
 
   renderData() {
-    const filteredData = this.state.data.filter(row => row.estimated && row.reported);
+    const filteredData = this.state.data
     return (
       <>
         <div className='chartContainer'>
@@ -120,11 +125,12 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
         </div>
         <table className="table table-bordered">
           <thead>
-            <tr><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th title="change after market close day after earnings announced">Earnings Move</th><th title="change in price at market open">Earnings Gap</th></tr>
+            <tr><th></th><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th title="change after market close day after earnings announced">Earnings Move</th><th title="change in price at market open">Earnings Gap</th></tr>
           </thead>
           <tbody>
-            { filteredData.map(dataRow => (
+            { filteredData.map((dataRow, index) => (
               <tr key={ dataRow.date }>
+                <td><input type="checkbox" checked={this.state.checkedMap[index]} onChange={this._onCheck.bind(this, index)}></input></td>
                 <td>{ dataRow.date }</td>
                 <td>{ dataRow.estimated }</td>
                 { this.actualEPS(dataRow) }
@@ -138,8 +144,17 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
     );
   }
 
+  private _onCheck(index: number): void {
+    this.setState({
+      checkedMap: {
+        ...this.state.checkedMap,
+        [index]: !this.state.checkedMap[index]
+      }
+    });
+  }
+
   chartData() {
-    const filteredData = this.state.data.filter(row => row.estimated && row.reported).slice(0, 4);
+    const filteredData = this.state.data.filter((_, index) => this.state.checkedMap[index]);
     return filteredData.map(earning => {
       const allDays = earning.pre.concat(earning.post);
       // end of day before earnings
