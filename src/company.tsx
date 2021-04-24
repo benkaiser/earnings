@@ -127,7 +127,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
       const midPoint = earning.pre[earning.pre.length-1].close;
       return {
         id: earning.date,
-        data: allDays.map((day, index) => ({
+        data: allDays.filter(day => day && day.close).map((day, index) => ({
           x: index - 10,
           y: day.close / midPoint * 100 - 100
         }))
