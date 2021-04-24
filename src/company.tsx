@@ -65,6 +65,25 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
           yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
           axisTop={null}
           axisRight={null}
+          tooltip={({ point} ) => {
+            const xLabel: string = point.data.x === 0
+              ? "Day of Earnings"
+              : (point.data.x > 0 ? "Days after earnings: " + point.data.x : "Days before earnings: " + Math.abs(point.data.x as number));
+
+            return (
+                <div
+                    style={{
+                        background: 'white',
+                        padding: '9px 12px',
+                        border: '1px solid #ccc',
+                    }}
+                >
+                    <div>{xLabel}</div>
+                    <div>Price difference from before earnings close: {(point.data.y as number).toFixed(2)}%</div>
+                    <div>Earnings season: {point.id}</div>
+                </div>
+            )
+        }}
           axisBottom={{
               format: (tick) => -tick,
               orient: 'bottom',
@@ -101,7 +120,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
         </div>
         <table className="table table-bordered">
           <thead>
-            <tr><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th>Earnings Move</th><th>Earnings Gap</th></tr>
+            <tr><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th title="change after market close day after earnings announced">Earnings Move</th><th title="change in price at market open">Earnings Gap</th></tr>
           </thead>
           <tbody>
             { filteredData.map(dataRow => (
