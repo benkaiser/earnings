@@ -14,24 +14,32 @@ export default function Header(): React.ReactElement {
 
         <div className="collapse navbar-collapse" id="navbarColor01">
           <ul className="navbar-nav mr-auto">
-            { COMPANY_LIST.map(company => {
-              const className = window.location.hash.indexOf(company) > -1 ? 'active' : '';
-              return (
-                <li key={ company } className={ `nav-item ${className}` }>
-                  <Link className="nav-link" to={`${company}`}>{ company }</Link>
-                </li>
-              )
-            } ) }
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                Change Company
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                { COMPANY_LIST.map(company => {
+                  const className = window.location.hash.indexOf(company) > -1 ? 'active' : '';
+                  return (
+                    <li key={ company }>
+                      <Link className={`dropdown-item ${className}`} to={`${company}`}>{ company }</Link>
+                    </li>
+                  )
+                } ) }
+              </ul>
+            </li>
           </ul>
-        </div>
-
-        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-            <ul className="navbar-nav ml-auto">
+          <div className="navbar-collapse collapse">
+            <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
                     <a className="nav-link" href="https://github.com/benkaiser/earnings">Github Source</a>
                 </li>
             </ul>
         </div>
+        </div>
+
+
       </div>
     </nav>
   );

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { ResponsiveLine } from '@nivo/line'
 
 import IEstimateWithInfo from "../shared/IEstimateWithInfo";
+import { COMPANY_LIST } from '../shared/constants';
 
 interface ICompanyRouteProps {
   company: string;
@@ -51,7 +52,23 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
     return (
       <div>
         <h1>
-          Stock Movements around Earnings for { this.props.match.params.company }
+          Stock Movements around Earnings for
+          { ' ' }
+          <div className="dropdown d-inline">
+            <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              { this.props.match.params.company }
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              { COMPANY_LIST.map(company => {
+                const className = window.location.hash.indexOf(company) > -1 ? 'active' : '';
+                return (
+                  <li key={ company }>
+                    <Link className={`dropdown-item ${className}`} to={`${company}`}>{ company }</Link>
+                  </li>
+                )
+              } ) }
+            </ul>
+          </div>
         </h1>
         { this.state.data && this.renderData() }
       </div>
@@ -84,7 +101,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
                     }}
                 >
                     <div>{xLabel}</div>
-                    <div>Price difference from before earnings close: {(point.data.y as number).toFixed(2)}%</div>
+                    <div>Price difference between pre-earnings close: {(point.data.y as number).toFixed(2)}%</div>
                     <div>Earnings season: {point.id}</div>
                 </div>
             )
@@ -108,7 +125,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
               legendOffset: -40,
               legendPosition: 'middle'
           }}
-          colors={{ scheme: 'nivo' }}
+          colors={{ scheme: 'set1' }}
           useMesh={true}
           legends={[
               {
@@ -123,14 +140,13 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
           ]}
         />
         </div>
-        <table className="table table-bordered">
+        <table className="table table-bordered table-hover">
           <thead>
-            <tr><th></th><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th title="change after market close day after earnings announced">Earnings Move</th><th title="change in price at market open">Earnings Gap</th></tr>
+            <tr><th>Date</th><th>Expected EPS</th><th>Actual EPS</th><th title="change after market close day after earnings announced">Earnings Move</th><th title="change in price at market open">Earnings Gap</th></tr>
           </thead>
-          <tbody>
+          <tbody style={ ({ cursor: 'pointer' }) }>
             { filteredData.map((dataRow, index) => (
-              <tr key={ dataRow.date }>
-                <td><input type="checkbox" checked={this.state.checkedMap[index]} onChange={this._onCheck.bind(this, index)}></input></td>
+              <tr key={ dataRow.date } onClick={this._onCheck.bind(this, index)} className={this.state.checkedMap[index] ? 'table-dark' : ''}>
                 <td>{ dataRow.date }</td>
                 <td>{ dataRow.estimated }</td>
                 { this.actualEPS(dataRow) }

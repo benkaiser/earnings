@@ -1,4 +1,4 @@
-import { Route, HashRouter, Switch, Link } from 'react-router-dom';
+import { Route, HashRouter, Switch, Redirect } from 'react-router-dom';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -12,7 +12,9 @@ ReactDOM.render(
     <Route path="/" render={() => <Header />} />
     <Body>
       <Switch>
-        <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/">
+          <Redirect to="/MSFT" />
+        </Route>
         <Route exact path="/:company" render={(routeProps) => <Company key={ routeProps.match.params.company } {...routeProps} /> } />
       </Switch>
     </Body>
