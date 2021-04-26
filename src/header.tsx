@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { COMPANY_LIST } from '../shared/constants';
+import { default as COMPANY_LIST }  from '../shared/CompanyList.json';
 
 export default function Header(): React.ReactElement {
   return (
@@ -19,7 +19,7 @@ export default function Header(): React.ReactElement {
                 Change Company
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                { COMPANY_LIST.map(company => {
+                { Object.keys(COMPANY_LIST).map((company: string) => {
                   const className = window.location.hash.indexOf(company) > -1 ? 'active' : '';
                   return (
                     <li key={ company }>

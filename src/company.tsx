@@ -3,7 +3,8 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import { ResponsiveLine } from '@nivo/line'
 
 import IEstimateWithInfo from "../shared/IEstimateWithInfo";
-import { COMPANY_LIST } from '../shared/constants';
+import { default as COMPANY_LIST }  from '../shared/CompanyList.json';
+import { ICompanyList, ICompanyOptions } from '../shared/ICompanyList';
 
 interface ICompanyRouteProps {
   company: string;
@@ -22,9 +23,12 @@ type CheckMap = { [key: string]: boolean };
 const dataCache: { [key: string]: IEstimateWithInfo[] } = {};
 
 export default class Company extends React.Component<ICompanyProps, ICompanyState> {
+  private options: ICompanyOptions;
+
   constructor(props: ICompanyProps) {
     super(props);
     const ticker = props.match.params.company;
+    this.options = (COMPANY_LIST as ICompanyList)[ticker];
     this.state = {
       ticker,
       data: dataCache[ticker]?.filter(row => row.estimated && row.reported),
@@ -59,7 +63,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
               { this.props.match.params.company }
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              { COMPANY_LIST.map(company => {
+              { Object.keys(COMPANY_LIST).map((company: string) => {
                 const className = window.location.hash.indexOf(company) > -1 ? 'active' : '';
                 return (
                   <li key={ company }>
@@ -89,8 +93,10 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
           axisRight={null}
           tooltip={({ point} ) => {
             const xLabel: string = point.data.x === 0
-              ? "Day of Earnings"
-              : (point.data.x > 0 ? "Days after earnings: " + point.data.x : "Days before earnings: " + Math.abs(point.data.x as number));
+              ? 'First market day after earnings'
+              : (point.data.x > 0 ?
+                  "Days after earnings: " + (this.options.type === 'pre' ? point.data.x : (point.data.x as number) + 1) :
+                  "Days before earnings: " + Math.abs(point.data.x as number + (this.options.type === 'pre' ? 0 : 1)));
 
             return (
                 <div
@@ -102,12 +108,14 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
                 >
                     <div>{xLabel}</div>
                     <div>Price difference between pre-earnings close: {(point.data.y as number).toFixed(2)}%</div>
-                    <div>Earnings season: {point.id}</div>
+                    <div>Earnings season: {point.serieId} (announced { this.options.type }-market)</div>
+                    <div>Date: {(point.data as any).date}</div>
+                    <div>Raw price at close: {(point.data as any).close}</div>
                 </div>
             )
         }}
           axisBottom={{
-              format: (tick) => -tick,
+              format: (tick) => (this.options.type === 'pre' ? -tick : -tick - 1),
               orient: 'bottom',
               tickSize: 1,
               tickPadding: 5,
@@ -129,7 +137,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
           useMesh={true}
           legends={[
               {
-                  anchor: 'bottom-right',
+                  anchor: window.innerWidth < 800 ? 'bottom': 'bottom-right',
                   direction: 'column',
                   justify: false,
                   translateX: 100,
@@ -178,8 +186,10 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
       return {
         id: earning.date,
         data: allDays.filter(day => day && day.close).map((day, index) => ({
-          x: index - 10,
-          y: day.close / midPoint * 100 - 100
+          x: index - 11,
+          y: day.close / midPoint * 100 - 100,
+          close: day.close,
+          date: day.date
         }))
       };
     });

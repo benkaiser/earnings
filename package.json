@@ -26,6 +26,7 @@
     "http-server": "^0.12.3",
     "jsonfile": "^6.0.1",
     "moment": "^2.27.0",
+    "moment-timezone": "^0.5.33",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",

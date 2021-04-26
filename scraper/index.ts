@@ -1,11 +1,12 @@
 import IEstimate from '../shared/IEstimate';
 import IEstimateWithInfo from '../shared/IEstimateWithInfo';
 import ITickerHistory from '../shared/ITickerHistory';
-import { COMPANY_LIST } from '../shared/constants';
+import { default as COMPANY_LIST }  from '../shared/CompanyList.json';
+import { ICompanyOptions, ICompanyList } from '../shared/ICompanyList';
 import { Response } from 'got';
 import path, { join } from 'path';
 import * as cheerio from 'cheerio';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { writeFile } from 'jsonfile';
 const cached = require('cached-got');
 const { got } = cached(path.join(__dirname, 'cache.json'));
@@ -33,15 +34,17 @@ console.log('- Started scrape');
 
 class CompanyScraper {
   private ticker: string;
+  private options: ICompanyOptions;
 
-  constructor(ticker: string) {
+  constructor(ticker: string, options: ICompanyOptions) {
     this.ticker = ticker;
+    this.options = options;
   }
 
   public process(): Promise<void> {
     return Promise.all([
       got(`https://query1.finance.yahoo.com/v8/finance/chart/${this.ticker}?interval=1d&range=50y`),
-      got(`https://finance.yahoo.com/calendar/earnings?from=2020-07-12&to=2020-07-18&day=2020-07-13&symbol=${this.ticker}`)
+      got(`https://finance.yahoo.com/calendar/earnings?symbol=${this.ticker}`)
     ]).then((responses: Response<any>[]) => {
       const [ priceResponse, earningsResponse ] = responses;
       const priceJson = this.processTickerPrices(priceResponse.body);
@@ -56,7 +59,7 @@ class CompanyScraper {
   private writeFile(fullEarningsData: IEstimateWithInfo[]): void {
     writeFile(join(__dirname, '..', 'data', this.ticker + '_full.json'), fullEarningsData);
     const partialEarnings = fullEarningsData.filter(item => {
-      return new Date(item.date) > moment().subtract(5, 'years').toDate()
+      return new Date(item.date) > moment().tz('America/New_York').subtract(5, 'years').toDate()
     });
     writeFile(join(__dirname, '..', 'data', this.ticker + '_partial.json'), partialEarnings);
   }
@@ -83,7 +86,7 @@ class CompanyScraper {
     return result.timestamp.map((timestamp, index) => {
       return {
         timestamp: timestamp,
-        date: moment(timestamp * 1000).format('YYYY-MM-DD'),
+        date: moment(timestamp * 1000).tz('America/New_York').format('YYYY-MM-DD'),
         index: index,
         close: this.toCents(result.indicators.quote[0].close[index]),
         high: this.toCents(result.indicators.quote[0].high[index]),
@@ -112,8 +115,8 @@ class CompanyScraper {
       };
       return {
         ...earning,
-        pre: [...Array(11)].map((_, index) => this.getPriceFor(tickerPrices, earning.date, -10 + index)),
-        post: [...Array(11)].map((_, index) => this.getPriceFor(tickerPrices, earning.date, index + 1))
+        pre: [...Array(11)].map((_, index) => this.getPriceFor(tickerPrices, earning.date, (this.options.type === 'pre' ? -11 : -10) + index)),
+        post: [...Array(11)].map((_, index) => this.getPriceFor(tickerPrices, earning.date, index + (this.options.type === 'pre' ? 0 : 1)))
       };
     });
   }
@@ -145,6 +148,6 @@ class CompanyScraper {
   }
 }
 
-COMPANY_LIST.forEach(ticker => {
-  new CompanyScraper(ticker).process();
+Object.keys(COMPANY_LIST).forEach((ticker: string) => {
+  new CompanyScraper(ticker, (COMPANY_LIST as ICompanyList)[ticker]).process();
 });
