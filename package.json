@@ -4,7 +4,8 @@
   "description": "Earnings Scraper",
   "main": "index.ts",
   "scripts": {
-    "scraper": "ts-node --project scraper/tsconfig.json scraper/index.ts",
+    "scraper": "ts-node --project scripts/tsconfig.json scripts/scraper.ts",
+    "addticker": "ts-node --project scripts/tsconfig.json scripts/addticker.ts",
     "build": "webpack --config src/webpack.config.js --watch",
     "start": "npm run build & http-server",
     "test": "echo \"Error: no test specified\" && exit 1"

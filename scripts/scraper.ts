@@ -51,7 +51,11 @@ class CompanyScraper {
       const earnignsJson = this.processEarningsPage(earningsResponse.body);
       const earningsDecorated = this.correlateEarningsWithStockprice(priceJson, earnignsJson);
       this.writeFile(earningsDecorated);
-    }).catch((error: Error) => {
+    })
+    .then(() => {
+      console.log('Done ' + this.ticker);
+    })
+    .catch((error: Error) => {
       console.error(error);
     });
   }
@@ -144,7 +148,7 @@ class CompanyScraper {
   }
 
   private processDate(date: string): string {
-    return moment(date.split(',').slice(0,2).join(',')).format('YYYY-MM-DD');
+    return moment(date.split(',').slice(0,2).join(','), 'MMM DD, YYYY').format('YYYY-MM-DD');
   }
 }
 
