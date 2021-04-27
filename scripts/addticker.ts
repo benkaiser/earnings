@@ -20,6 +20,10 @@ if (GITHUB_ISSUE.labels.filter(label => label.name === 'addticker')) {
     const announceType: string = GITHUB_ISSUE.body.match(/:\s+(.+)/)![1].trim();
     console.log('Ticker: ' + ticker);
     console.log('Announces: ' + announceType);
+    if (announceType !== 'pre' && announceType !== 'post') {
+      console.error('Invalid annoucement type, must be pre or post');
+      process.exit(1);
+    }
     const Companies = JSON.parse(fs.readFileSync('../shared/CompanyList.json'));
     Companies[ticker] = { type: ticker };
     fs.writeFileSync(JSON.stringify(Companies, null, 2));
