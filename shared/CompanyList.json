@@ -31,5 +31,8 @@
   },
   "EBAY": {
     "type": "post"
+  },
+  "SNOW": {
+    "type": "pre"
   }
 }
