@@ -19,7 +19,7 @@ jobs:
     - run: npm ci
     - name: Add issue to env, run add script
       env:
-        GITHUB_CONTEXT: ${{ github.event.issue }}
+        GITHUB_CONTEXT: ${{ toJson(github.event.issue) }}
       run: npm run addticker
     - name: Committing changes
       uses: EndBug/add-and-commit@v7
