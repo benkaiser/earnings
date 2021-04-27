@@ -28,5 +28,8 @@
   },
   "GOOGL": {
     "type": "post"
+  },
+  "EBAY": {
+    "type": "post"
   }
 }
