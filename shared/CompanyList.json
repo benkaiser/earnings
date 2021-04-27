@@ -25,5 +25,8 @@
   },
   "V": {
     "type": "pre"
+  },
+  "TWTR": {
+    "type": "TWTR"
   }
 }
