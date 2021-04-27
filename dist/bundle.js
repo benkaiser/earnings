@@ -6697,10 +6697,10 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /*!*********************************!*\
   !*** ./shared/CompanyList.json ***!
   \*********************************/
-/*! exports provided: AAPL, AMZN, FB, MSFT, TSLA, DBX, SHOP, SPOT, default */
+/*! exports provided: AAPL, AMZN, FB, MSFT, TSLA, DBX, SHOP, SPOT, V, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"AAPL\\\":{\\\"type\\\":\\\"post\\\"},\\\"AMZN\\\":{\\\"type\\\":\\\"post\\\"},\\\"FB\\\":{\\\"type\\\":\\\"post\\\"},\\\"MSFT\\\":{\\\"type\\\":\\\"post\\\"},\\\"TSLA\\\":{\\\"type\\\":\\\"post\\\"},\\\"DBX\\\":{\\\"type\\\":\\\"post\\\"},\\\"SHOP\\\":{\\\"type\\\":\\\"pre\\\"},\\\"SPOT\\\":{\\\"type\\\":\\\"pre\\\"}}\");\n\n//# sourceURL=webpack:///./shared/CompanyList.json?");
+eval("module.exports = JSON.parse(\"{\\\"AAPL\\\":{\\\"type\\\":\\\"post\\\"},\\\"AMZN\\\":{\\\"type\\\":\\\"post\\\"},\\\"FB\\\":{\\\"type\\\":\\\"post\\\"},\\\"MSFT\\\":{\\\"type\\\":\\\"post\\\"},\\\"TSLA\\\":{\\\"type\\\":\\\"post\\\"},\\\"DBX\\\":{\\\"type\\\":\\\"post\\\"},\\\"SHOP\\\":{\\\"type\\\":\\\"pre\\\"},\\\"SPOT\\\":{\\\"type\\\":\\\"pre\\\"},\\\"V\\\":{\\\"type\\\":\\\"pre\\\"}}\");\n\n//# sourceURL=webpack:///./shared/CompanyList.json?");
 
 /***/ }),
 
