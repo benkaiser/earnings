@@ -25,9 +25,10 @@ if (GITHUB_ISSUE.labels.filter(label => label.name === 'addticker')) {
       console.error('Invalid annoucement type, must be pre or post');
       process.exit(1);
     }
-    const Companies = JSON.parse(fs.readFileSync(path.join(__dirname, '../shared/CompanyList.json')));
+    const companyFile = path.join(__dirname, '../shared/CompanyList.json');
+    const Companies = JSON.parse(fs.readFileSync());
     Companies[ticker] = { type: ticker };
-    fs.writeFileSync(JSON.stringify(Companies, null, 2));
+    fs.writeFileSync(companyFile, JSON.stringify(Companies, null, 2));
     console.log('Attempting scrape');
     require('./scraper');
   } catch (error) {
