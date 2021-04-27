@@ -1,10 +1,29 @@
 {
-  "AAPL": { "type": "post" },
-  "AMZN": { "type": "post" },
-  "FB": { "type": "post" },
-  "MSFT": { "type": "post" },
-  "TSLA": { "type": "post" },
-  "DBX": { "type": "post" },
-  "SHOP": { "type": "pre" },
-  "SPOT": { "type": "pre" }
+  "AAPL": {
+    "type": "post"
+  },
+  "AMZN": {
+    "type": "post"
+  },
+  "FB": {
+    "type": "post"
+  },
+  "MSFT": {
+    "type": "post"
+  },
+  "TSLA": {
+    "type": "post"
+  },
+  "DBX": {
+    "type": "post"
+  },
+  "SHOP": {
+    "type": "pre"
+  },
+  "SPOT": {
+    "type": "pre"
+  },
+  "V": {
+    "type": "V"
+  }
 }
