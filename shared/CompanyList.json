@@ -31,5 +31,8 @@
   },
   "DPZ": {
     "type": "DPZ"
+  },
+  "NIO": {
+    "type": "NIO"
   }
 }
