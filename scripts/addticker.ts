@@ -26,7 +26,7 @@ if (GITHUB_ISSUE.labels.filter(label => label.name === 'addticker')) {
       process.exit(1);
     }
     const companyFile = path.join(__dirname, '../shared/CompanyList.json');
-    const Companies = JSON.parse(fs.readFileSync());
+    const Companies = JSON.parse(fs.readFileSync(companyFile));
     Companies[ticker] = { type: ticker };
     fs.writeFileSync(companyFile, JSON.stringify(Companies, null, 2));
     console.log('Attempting scrape');
