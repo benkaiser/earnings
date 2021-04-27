@@ -42,7 +42,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
     if (this.state.data) {
       return;
     }
-    fetch(`data/${this.state.ticker}_partial.json`)
+    fetch(`data/${this.state.ticker}_partial.json` + window.location.search)
     .then(response => response.json())
     .then(data => {
       console.log(data);
