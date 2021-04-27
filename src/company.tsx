@@ -105,6 +105,7 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
           margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
           xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
           yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+          gridXValues={[-1]}
           axisTop={null}
           axisRight={null}
           tooltip={({ point} ) => {
