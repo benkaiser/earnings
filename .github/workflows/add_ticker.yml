@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: 14.x
     - run: npm ci
-    - run: npm run addticker -- --comment ${{ toJSON(github.event) }}
+    - run: npm run addticker -- --comment "${{ toJSON(github.event) }}"
     - name: Committing changes
       uses: EndBug/add-and-commit@v7
       with:
