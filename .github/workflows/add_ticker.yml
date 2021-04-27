@@ -26,3 +26,8 @@ jobs:
       with:
         author_name: Github Actions
         author_email: actions@github.com
+    - name: Close Issue
+        uses: peter-evans/close-issue@v1
+        with:
+          issue-number: ${{github.event.issue.id}}
+          comment: Add company processed

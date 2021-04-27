@@ -29,6 +29,9 @@ export default function Header(): React.ReactElement {
                 } ) }
               </ul>
             </li>
+            <li className="nav-item">
+              <Link className='nav-link' to='/addticker'>Add Company</Link>
+            </li>
           </ul>
           <div className="navbar-collapse collapse">
             <ul className="navbar-nav ms-auto">

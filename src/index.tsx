@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom';
 import Company from './company';
 import Header from './header';
 import Body from './body';
-import Home from './home';
+import AddCompany from './AddCompany';
 
 ReactDOM.render(
   <HashRouter>
@@ -15,6 +15,7 @@ ReactDOM.render(
         <Route exact path="/">
           <Redirect to="/MSFT" />
         </Route>
+        <Route exact path="/addticker" render={(routeProps) => <AddCompany {...routeProps} /> } />
         <Route exact path="/:company" render={(routeProps) => <Company key={ routeProps.match.params.company } {...routeProps} /> } />
       </Switch>
     </Body>
