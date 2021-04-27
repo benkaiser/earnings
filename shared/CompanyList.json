@@ -25,20 +25,5 @@
   },
   "V": {
     "type": "pre"
-  },
-  "TWTR": {
-    "type": "TWTR"
-  },
-  "DPZ": {
-    "type": "DPZ"
-  },
-  "NIO": {
-    "type": "NIO"
-  },
-  "GOOGL": {
-    "type": "GOOGL"
-  },
-  "PINS": {
-    "type": "PINS"
   }
 }
