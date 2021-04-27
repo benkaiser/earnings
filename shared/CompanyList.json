@@ -34,5 +34,8 @@
   },
   "NIO": {
     "type": "NIO"
+  },
+  "GOOGL": {
+    "type": "GOOGL"
   }
 }
