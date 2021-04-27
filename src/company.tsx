@@ -16,6 +16,7 @@ interface ICompanyState {
   ticker: string;
   data: IEstimateWithInfo[];
   checkedMap: CheckMap;
+  unableToFindTicker: boolean;
 }
 
 type CheckMap = { [key: string]: boolean };
@@ -32,7 +33,8 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
     this.state = {
       ticker,
       data: dataCache[ticker]?.filter(row => row.estimated && row.reported),
-      checkedMap: { 0: true, 1: true, 2: true, 3: true }
+      checkedMap: { 0: true, 1: true, 2: true, 3: true },
+      unableToFindTicker: false
     };
   }
 
@@ -49,10 +51,24 @@ export default class Company extends React.Component<ICompanyProps, ICompanyStat
       this.setState({
         data: filteredData
       });
+    })
+    .catch(() => {
+      this.setState({
+        unableToFindTicker: true
+      });
     });
   }
 
   render() {
+    if (this.state.unableToFindTicker) {
+      return (
+        <div>
+          <h1>Company not yet available</h1>
+          <p>Please click the below refresh button to cache-bust the page (Github caches agressively)</p>
+          <a className='btn btn-primary btn-large' href={window.location.origin + window.location.pathname + '?cachebust=' + Math.random() + window.location.hash}>Reload</a>
+        </div>
+      );
+    }
     return (
       <div>
         <h1>
