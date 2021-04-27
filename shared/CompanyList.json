@@ -28,5 +28,8 @@
   },
   "TWTR": {
     "type": "TWTR"
+  },
+  "DPZ": {
+    "type": "DPZ"
   }
 }
