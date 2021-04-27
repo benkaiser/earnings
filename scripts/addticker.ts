@@ -1,13 +1,31 @@
+const fs = require('fs');
+
+export interface ILabel {
+  name: string;
+}
+
 export interface IGithubIssue {
   body: string;
   id: number;
   title: string;
-  labels: string[];
+  labels: ILabel[];
 }
 
 const GITHUB_ISSUE: IGithubIssue = JSON.parse(process.env.GITHUB_CONTEXT!) as IGithubIssue;
 
-console.log(GITHUB_ISSUE.body);
-console.log(GITHUB_ISSUE.title);
-console.log(GITHUB_ISSUE.labels);
-console.log(GITHUB_ISSUE.id);
+if (GITHUB_ISSUE.labels.filter(label => label.name === 'addticker')) {
+  console.log('Found addticker label');
+  try {
+    const ticker: string = GITHUB_ISSUE.title.match(/:\s+(.+)/)![1].trim();
+    const announceType: string = GITHUB_ISSUE.body.match(/:\s+(.+)/)![1].trim();
+    console.log('Ticker: ' + ticker);
+    console.log('Announces: ' + announceType);
+    const Companies = JSON.parse(fs.readFileSync('../shared/CompanyList.json'));
+    Companies[ticker] = { type: ticker };
+    fs.writeFileSync(JSON.stringify(Companies, null, 2));
+    console.log('Attempting scrape');
+    require('./scraper');
+  } catch (error) {
+    console.error(error);
+  }
+}
