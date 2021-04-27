@@ -21,6 +21,8 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJson(github.event.issue) }}
       run: npm run addticker
+    - name: Rebuilding bundle with new ticker
+      run: npm run bundle
     - name: Committing changes
       uses: EndBug/add-and-commit@v7
       with:
