@@ -8,11 +8,11 @@ export default function Header(): React.ReactElement {
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
         <a className="navbar-brand" href="#">Earnings Movements</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarColor01">
+        <div className="collapse navbar-collapse" id="navbar">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
