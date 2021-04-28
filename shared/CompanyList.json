@@ -52,5 +52,8 @@
   },
   "INTC": {
     "type": "post"
+  },
+  "BB": {
+    "type": "post"
   }
 }
