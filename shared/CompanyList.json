@@ -55,5 +55,8 @@
   },
   "BB": {
     "type": "post"
+  },
+  "GME": {
+    "type": "post"
   }
 }
