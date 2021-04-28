@@ -49,5 +49,8 @@
   },
   "Pypl": {
     "type": "post"
+  },
+  "INTC": {
+    "type": "post"
   }
 }
