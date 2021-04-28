@@ -38,16 +38,16 @@
   "GRFS": {
     "type": "pre"
   },
-  "amd": {
+  "AMD": {
     "type": "post"
   },
   "NIO": {
     "type": "post"
   },
-  "Atom": {
+  "ATOM": {
     "type": "post"
   },
-  "Pypl": {
+  "PYPL": {
     "type": "post"
   },
   "INTC": {

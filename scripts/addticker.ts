@@ -17,8 +17,8 @@ const GITHUB_ISSUE: IGithubIssue = JSON.parse(process.env.GITHUB_CONTEXT!) as IG
 if (GITHUB_ISSUE.labels.filter(label => label.name === 'addticker')) {
   console.log('Found addticker label');
   try {
-    const ticker: string = GITHUB_ISSUE.title.match(/:\s+(.+)/)![1].trim();
-    const announceType: string = GITHUB_ISSUE.body.match(/:\s+(.+)/)![1].trim();
+    const ticker: string = GITHUB_ISSUE.title.match(/:\s+(.+)/)![1].trim().toUpperCase();
+    const announceType: string = GITHUB_ISSUE.body.match(/:\s+(.+)/)![1].trim().toLocaleLowerCase();
     console.log('Ticker: ' + ticker);
     console.log('Announces: ' + announceType);
     if (announceType !== 'pre' && announceType !== 'post') {

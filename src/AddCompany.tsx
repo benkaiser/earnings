@@ -11,7 +11,7 @@ export default function AddCompany(_: RouteComponentProps): React.ReactElement {
       return;
     }
     setTickerState(tickerRef.current.value);
-    const ticker = tickerRef.current.value;
+    const ticker = tickerRef.current.value.toUpperCase();
     const announce = announceRef.current.value;
     window.open(`https://github.com/benkaiser/earnings/issues/new?title=${encodeURIComponent(`Add Stock: ${ticker}`)}&body=${encodeURIComponent(`Announces: ${announce}`)}&labels=addticker`, '_blank');
   }
