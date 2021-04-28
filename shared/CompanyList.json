@@ -34,5 +34,8 @@
   },
   "SNOW": {
     "type": "pre"
+  },
+  "GRFS": {
+    "type": "pre"
   }
 }
