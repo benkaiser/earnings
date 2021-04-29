@@ -58,5 +58,8 @@
   },
   "GME": {
     "type": "post"
+  },
+  "PLTR": {
+    "type": "pre"
   }
 }
