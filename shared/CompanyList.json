@@ -64,5 +64,8 @@
   },
   "UBER": {
     "type": "post"
+  },
+  "BYND": {
+    "type": "post"
   }
 }
