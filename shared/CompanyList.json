@@ -61,5 +61,8 @@
   },
   "PLTR": {
     "type": "pre"
+  },
+  "UBER": {
+    "type": "post"
   }
 }
