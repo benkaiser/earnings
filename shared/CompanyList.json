@@ -70,5 +70,8 @@
   },
   "LYFT": {
     "type": "post"
+  },
+  "AMC": {
+    "type": "post"
   }
 }
