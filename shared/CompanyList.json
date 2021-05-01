@@ -73,5 +73,8 @@
   },
   "AMC": {
     "type": "post"
+  },
+  "SQ": {
+    "type": "post"
   }
 }
