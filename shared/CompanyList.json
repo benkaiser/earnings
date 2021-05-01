@@ -67,5 +67,8 @@
   },
   "BYND": {
     "type": "post"
+  },
+  "LYFT": {
+    "type": "post"
   }
 }
