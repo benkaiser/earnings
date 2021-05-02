@@ -79,5 +79,8 @@
   },
   "PFE": {
     "type": "pre"
+  },
+  "NET": {
+    "type": "post"
   }
 }
