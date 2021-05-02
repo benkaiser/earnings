@@ -82,5 +82,8 @@
   },
   "NET": {
     "type": "post"
+  },
+  "NVAX": {
+    "type": "post"
   }
 }
