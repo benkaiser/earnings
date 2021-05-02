@@ -88,5 +88,8 @@
   },
   "MRNA": {
     "type": "post"
+  },
+  "GM": {
+    "type": "pre"
   }
 }
