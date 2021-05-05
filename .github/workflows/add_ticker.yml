@@ -1,7 +1,6 @@
 name: 'Add Stonk'
 on:
-  issues:
-    types: [opened]
+  repository_dispatch:
 
 defaults:
   run:
@@ -11,15 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - name: Use Node.js 14.x
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
+    - uses: actions/checkout@v2
     - run: npm ci
+    - uses: actions/checkout@v2
     - name: Add issue to env, run add script
       env:
-        GITHUB_CONTEXT: ${{ toJson(github.event.issue) }}
+        GITHUB_CONTEXT: ${{ github.event.client_payload.data }}
       run: npm run addticker
     - name: Rebuilding bundle with new ticker
       run: npm run bundle
