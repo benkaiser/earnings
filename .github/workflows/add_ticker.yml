@@ -14,9 +14,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - uses: actions/checkout@v2
     - run: npm ci
-    - uses: actions/checkout@v2
     - name: Add issue to env, run add script
       env:
         GITHUB_CONTEXT: ${{ github.event.client_payload.data }}
