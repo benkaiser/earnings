@@ -14,6 +14,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
+    - uses: actions/checkout@v2
     - run: npm ci
     - name: Add issue to env, run add script
       env:
