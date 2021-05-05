@@ -6,13 +6,11 @@ export interface IActionInput {
   type: string;
 }
 
-console.log(process.env.GITHUB_CONTEXT);
 const ACTION_INPUTS: IActionInput = JSON.parse(process.env.GITHUB_CONTEXT!) as IActionInput;
-console.log(ACTION_INPUTS);
 
 try {
   const ticker: string = ACTION_INPUTS.ticker.toUpperCase();
-  const announceType: string = ACTION_INPUTS.type.toUpperCase();
+  const announceType: string = ACTION_INPUTS.type.toLowerCase();
   console.log('Ticker: ' + ticker);
   console.log('Announces: ' + announceType);
   if (announceType !== 'pre' && announceType !== 'post') {
@@ -21,6 +19,9 @@ try {
   }
   const companyFile = path.join(__dirname, '../shared/CompanyList.json');
   const Companies = JSON.parse(fs.readFileSync(companyFile));
+  if (Companies[ticker] && Companies[ticker].type === announceType) {
+    throw new Error('Company with same earnings type already exists');
+  }
   Companies[ticker] = { type: announceType };
   fs.writeFileSync(companyFile, JSON.stringify(Companies, null, 2));
   console.log('Attempting scrape');
