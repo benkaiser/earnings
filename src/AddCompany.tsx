@@ -6,14 +6,32 @@ export default function AddCompany(_: RouteComponentProps): React.ReactElement {
   const tickerRef = React.useRef<HTMLInputElement>(null);
   const announceRef = React.useRef<HTMLSelectElement>(null);
   const [tickerState, setTickerState] = React.useState<string>();
+  const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
   function addCompany() {
     if (!tickerRef.current?.value || !announceRef.current?.value) {
       return;
     }
-    setTickerState(tickerRef.current.value);
     const ticker = tickerRef.current.value.toUpperCase();
     const announce = announceRef.current.value;
-    window.open(`https://github.com/benkaiser/earnings/issues/new?title=${encodeURIComponent(`Add Stock: ${ticker}`)}&body=${encodeURIComponent(`Announces: ${announce}`)}&labels=addticker`, '_blank');
+    setTickerState(ticker);
+    fetch("https://publicactiontrigger.azurewebsites.net/api/dispatches/benkaiser/earnings", {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({ event_type: 'Add Ticker: ' + ticker, client_payload: { data: JSON.stringify({ ticker: ticker, type: announce }) } })
+    });
+    setInterval(() => {
+      console.log('Checking for ticker available...');
+      fetch(`data/${ticker}_partial.json?cachebust=${Math.random()}`).then((response) => {
+        if (response.status === 200) {
+          console.log('Ticker available, redirecting');
+          window.location.href = window.location.pathname + '?cachebust=' + Math.random() +  '#/MSFT';
+        } else {
+          console.log('Ticker not yet available');
+        }
+      }).catch(() => {
+        console.log('Ticker not yet available');
+      });
+    }, 5000);
   }
   return (
     <div>
@@ -21,7 +39,7 @@ export default function AddCompany(_: RouteComponentProps): React.ReactElement {
         Add a Ticker
       </h1>
       { tickerState ?
-        <p>Navigate to the page for <Link to={'/' + tickerState}>{tickerState}</Link>, you'll be prompted to refresh repeatedly until it's available.</p> :
+        <p>Waiting for {tickerState} to be added, this may take up to a minute. You'll be redirected once it is available.</p> :
         <>
           <p>Note: requires a Github account</p>
           <div className="mb-3 row">
