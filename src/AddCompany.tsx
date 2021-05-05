@@ -39,9 +39,11 @@ export default function AddCompany(_: RouteComponentProps): React.ReactElement {
         Add a Ticker
       </h1>
       { tickerState ?
-        <p>Waiting for {tickerState} to be added, this may take up to a minute. You'll be redirected once it is available.</p> :
         <>
-          <p>Note: requires a Github account</p>
+          <p>Waiting for {tickerState} to be added, this may take up to a minute. You'll be redirected once it is available.</p>
+          <img src="dist/pulse.svg" alt="Loading spinner" />
+        </> :
+        <>
           <div className="mb-3 row">
             <label htmlFor="inputTicker" className="col-sm-3 col-form-label">Stock Ticker</label>
             <div className="col-sm-9">
