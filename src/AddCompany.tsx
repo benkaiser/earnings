@@ -24,7 +24,7 @@ export default function AddCompany(_: RouteComponentProps): React.ReactElement {
       fetch(`data/${ticker}_partial.json?cachebust=${Math.random()}`).then((response) => {
         if (response.status === 200) {
           console.log('Ticker available, redirecting');
-          window.location.href = window.location.pathname + '?cachebust=' + Math.random() +  '#/MSFT';
+          window.location.href = window.location.pathname + '?cachebust=' + Math.random() +  '#/' + ticker;
         } else {
           console.log('Ticker not yet available');
         }
