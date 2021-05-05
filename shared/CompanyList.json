@@ -91,5 +91,8 @@
   },
   "GM": {
     "type": "pre"
+  },
+  "ETSY": {
+    "type": "post"
   }
 }
