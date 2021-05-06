@@ -94,5 +94,8 @@
   },
   "ETSY": {
     "type": "post"
+  },
+  "ROKU": {
+    "type": "post"
   }
 }
