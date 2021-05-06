@@ -100,5 +100,8 @@
   },
   "DKNG": {
     "type": "pre"
+  },
+  "PTON": {
+    "type": "post"
   }
 }
