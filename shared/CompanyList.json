@@ -97,5 +97,8 @@
   },
   "ROKU": {
     "type": "post"
+  },
+  "DKNG": {
+    "type": "pre"
   }
 }
