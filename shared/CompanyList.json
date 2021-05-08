@@ -127,5 +127,8 @@
   },
   "WORKHORSE": {
     "type": "pre"
+  },
+  "SDGR ": {
+    "type": "pre"
   }
 }
