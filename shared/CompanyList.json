@@ -103,5 +103,8 @@
   },
   "PTON": {
     "type": "post"
+  },
+  "ABNB": {
+    "type": "post"
   }
 }
