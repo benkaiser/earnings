@@ -130,5 +130,8 @@
   },
   "SDGR ": {
     "type": "pre"
+  },
+  "VZIO": {
+    "type": "pre"
   }
 }
