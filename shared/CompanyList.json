@@ -109,5 +109,8 @@
   },
   "SONY ": {
     "type": "pre"
+  },
+  "UWMC": {
+    "type": "pre"
   }
 }
