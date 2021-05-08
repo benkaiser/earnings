@@ -106,5 +106,8 @@
   },
   "ABNB": {
     "type": "post"
+  },
+  "SONY ": {
+    "type": "pre"
   }
 }
