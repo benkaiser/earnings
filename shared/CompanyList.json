@@ -133,5 +133,8 @@
   },
   "VZIO": {
     "type": "pre"
+  },
+  "NVDA": {
+    "type": "pre"
   }
 }
