@@ -142,5 +142,8 @@
   },
   "DIS": {
     "type": "post"
+  },
+  "MU": {
+    "type": "post"
   }
 }
