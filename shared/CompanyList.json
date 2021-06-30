@@ -136,5 +136,8 @@
   },
   "NVDA": {
     "type": "pre"
+  },
+  "DFS": {
+    "type": "pre"
   }
 }
