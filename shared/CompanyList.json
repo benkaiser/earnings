@@ -139,5 +139,8 @@
   },
   "DFS": {
     "type": "pre"
+  },
+  "DIS": {
+    "type": "post"
   }
 }
