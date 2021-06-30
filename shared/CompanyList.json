@@ -145,5 +145,8 @@
   },
   "MU": {
     "type": "post"
+  },
+  "TGT": {
+    "type": "pre"
   }
 }
