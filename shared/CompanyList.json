@@ -151,5 +151,8 @@
   },
   "UNH": {
     "type": "post"
+  },
+  "ASML": {
+    "type": "pre"
   }
 }
