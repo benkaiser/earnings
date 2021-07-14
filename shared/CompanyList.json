@@ -154,5 +154,8 @@
   },
   "ASML": {
     "type": "pre"
+  },
+  "BAC": {
+    "type": "pre"
   }
 }
