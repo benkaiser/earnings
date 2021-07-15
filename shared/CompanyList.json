@@ -163,5 +163,8 @@
   },
   "WFC": {
     "type": "pre"
+  },
+  "TSM": {
+    "type": "pre"
   }
 }
