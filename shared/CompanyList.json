@@ -166,5 +166,8 @@
   },
   "TSM": {
     "type": "pre"
+  },
+  "MS": {
+    "type": "pre"
   }
 }
