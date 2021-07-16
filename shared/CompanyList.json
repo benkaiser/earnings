@@ -172,5 +172,8 @@
   },
   "TXN": {
     "type": "pre"
+  },
+  "IBM": {
+    "type": "pre"
   }
 }
