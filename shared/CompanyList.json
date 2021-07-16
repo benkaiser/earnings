@@ -169,5 +169,8 @@
   },
   "MS": {
     "type": "pre"
+  },
+  "TXN": {
+    "type": "pre"
   }
 }
