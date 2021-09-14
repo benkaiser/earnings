@@ -181,5 +181,8 @@
   },
   "TMSC": {
     "type": "pre"
+  },
+  "TEAM": {
+    "type": "post"
   }
 }
