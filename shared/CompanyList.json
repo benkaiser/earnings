@@ -184,5 +184,8 @@
   },
   "TEAM": {
     "type": "post"
+  },
+  "SFIX": {
+    "type": "post"
   }
 }
