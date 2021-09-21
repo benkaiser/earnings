@@ -190,5 +190,8 @@
   },
   "FDX": {
     "type": "post"
+  },
+  "ADBE": {
+    "type": "post"
   }
 }
