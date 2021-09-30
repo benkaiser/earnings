@@ -12,7 +12,7 @@
     "type": "post"
   },
   "TSLA": {
-    "type": "post"
+    "type": "pre"
   },
   "DBX": {
     "type": "post"
