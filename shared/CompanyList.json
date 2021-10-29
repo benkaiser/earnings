@@ -57,7 +57,7 @@
     "type": "post"
   },
   "GME": {
-    "type": "post"
+    "type": "pre"
   },
   "PLTR": {
     "type": "pre"
