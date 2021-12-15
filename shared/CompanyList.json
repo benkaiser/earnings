@@ -196,5 +196,8 @@
   },
   "TWTR": {
     "type": "post"
+  },
+  "NKE": {
+    "type": "post"
   }
 }
