@@ -199,5 +199,8 @@
   },
   "NKE": {
     "type": "post"
+  },
+  "META": {
+    "type": "post"
   }
 }
