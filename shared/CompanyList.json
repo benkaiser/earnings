@@ -202,5 +202,8 @@
   },
   "META": {
     "type": "post"
+  },
+  "FORTINET": {
+    "type": "pre"
   }
 }
