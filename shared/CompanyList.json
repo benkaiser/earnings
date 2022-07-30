@@ -205,5 +205,8 @@
   },
   "FORTINET": {
     "type": "pre"
+  },
+  "FO8": {
+    "type": "post"
   }
 }
