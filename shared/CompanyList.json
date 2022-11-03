@@ -214,5 +214,8 @@
   },
   "TBLT": {
     "type": "post"
+  },
+  "HOOD": {
+    "type": "post"
   }
 }
