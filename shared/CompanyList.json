@@ -220,5 +220,8 @@
   },
   "HD": {
     "type": "pre"
+  },
+  "ADM": {
+    "type": "pre"
   }
 }
