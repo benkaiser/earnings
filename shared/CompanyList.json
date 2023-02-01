@@ -223,5 +223,8 @@
   },
   "ADM": {
     "type": "pre"
+  },
+  "NKLA": {
+    "type": "pre"
   }
 }
