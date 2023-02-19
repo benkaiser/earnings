@@ -226,5 +226,8 @@
   },
   "NKLA": {
     "type": "pre"
+  },
+  "CVNA": {
+    "type": "post"
   }
 }
