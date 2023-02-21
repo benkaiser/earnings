@@ -229,5 +229,8 @@
   },
   "CVNA": {
     "type": "post"
+  },
+  "W": {
+    "type": "pre"
   }
 }
