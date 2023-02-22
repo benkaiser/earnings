@@ -232,5 +232,8 @@
   },
   "W": {
     "type": "pre"
+  },
+  "TDOC": {
+    "type": "post"
   }
 }
