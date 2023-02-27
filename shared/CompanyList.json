@@ -241,5 +241,8 @@
   },
   "CLOV": {
     "type": "pre"
+  },
+  "KSS": {
+    "type": "pre"
   }
 }
