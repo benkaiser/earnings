@@ -235,5 +235,8 @@
   },
   "TDOC": {
     "type": "post"
+  },
+  "ZM": {
+    "type": "post"
   }
 }
