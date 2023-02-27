@@ -238,5 +238,8 @@
   },
   "ZM": {
     "type": "post"
+  },
+  "CLOV": {
+    "type": "pre"
   }
 }
