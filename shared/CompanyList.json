@@ -244,5 +244,8 @@
   },
   "KSS": {
     "type": "pre"
+  },
+  "COST": {
+    "type": "post"
   }
 }
