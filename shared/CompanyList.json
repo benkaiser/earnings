@@ -247,5 +247,8 @@
   },
   "COST": {
     "type": "post"
+  },
+  "ULTA": {
+    "type": "post"
   }
 }
