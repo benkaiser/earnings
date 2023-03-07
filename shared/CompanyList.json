@@ -250,5 +250,8 @@
   },
   "ULTA": {
     "type": "post"
+  },
+  "CRWD": {
+    "type": "post"
   }
 }
