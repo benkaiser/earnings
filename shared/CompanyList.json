@@ -256,5 +256,8 @@
   },
   "LULU": {
     "type": "post"
+  },
+  "KMX": {
+    "type": "pre"
   }
 }
