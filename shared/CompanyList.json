@@ -262,5 +262,8 @@
   },
   "NFLX": {
     "type": "post"
+  },
+  "SCHW": {
+    "type": "pre"
   }
 }
