@@ -265,5 +265,8 @@
   },
   "SCHW": {
     "type": "pre"
+  },
+  "ENPH": {
+    "type": "post"
   }
 }
