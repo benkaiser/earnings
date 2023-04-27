@@ -271,5 +271,8 @@
   },
   "SOFI": {
     "type": "pre"
+  },
+  "SNAP": {
+    "type": "post"
   }
 }
