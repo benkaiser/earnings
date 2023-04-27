@@ -268,5 +268,8 @@
   },
   "ENPH": {
     "type": "post"
+  },
+  "SOFI": {
+    "type": "pre"
   }
 }
