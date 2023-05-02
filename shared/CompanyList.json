@@ -274,5 +274,8 @@
   },
   "SNAP": {
     "type": "post"
+  },
+  "UPST": {
+    "type": "post"
   }
 }
