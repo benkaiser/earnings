@@ -277,5 +277,8 @@
   },
   "UPST": {
     "type": "post"
+  },
+  "LC": {
+    "type": "post"
   }
 }
