@@ -280,5 +280,8 @@
   },
   "LC": {
     "type": "post"
+  },
+  "AFRM": {
+    "type": "pre"
   }
 }
