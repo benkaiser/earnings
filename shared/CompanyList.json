@@ -283,5 +283,8 @@
   },
   "AFRM": {
     "type": "post"
+  },
+  "CMG": {
+    "type": "post"
   }
 }
