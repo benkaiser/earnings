@@ -216,7 +216,7 @@
     "type": "post"
   },
   "HOOD": {
-    "type": "post"
+    "type": "pre"
   },
   "HD": {
     "type": "pre"
