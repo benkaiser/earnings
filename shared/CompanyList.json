@@ -286,5 +286,8 @@
   },
   "CMG": {
     "type": "post"
+  },
+  "RUN": {
+    "type": "pre"
   }
 }
