@@ -289,5 +289,8 @@
   },
   "RUN": {
     "type": "pre"
+  },
+  "UPS": {
+    "type": "pre"
   }
 }
