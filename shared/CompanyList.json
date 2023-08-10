@@ -141,7 +141,7 @@
     "type": "pre"
   },
   "DIS": {
-    "type": "post"
+    "type": "pre"
   },
   "MU": {
     "type": "post"
