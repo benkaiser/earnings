@@ -292,5 +292,8 @@
   },
   "UPS": {
     "type": "pre"
+  },
+  "PANW": {
+    "type": "post"
   }
 }
