@@ -295,5 +295,8 @@
   },
   "PANW": {
     "type": "post"
+  },
+  "AI": {
+    "type": "post"
   }
 }
