@@ -298,5 +298,8 @@
   },
   "AI": {
     "type": "post"
+  },
+  "DPZ": {
+    "type": "pre"
   }
 }
