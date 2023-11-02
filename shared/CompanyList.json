@@ -304,5 +304,8 @@
   },
   "LMT": {
     "type": "pre"
+  },
+  "SBUX": {
+    "type": "pre"
   }
 }
