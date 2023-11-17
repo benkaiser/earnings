@@ -307,5 +307,8 @@
   },
   "SBUX": {
     "type": "pre"
+  },
+  "ZOOM": {
+    "type": "post"
   }
 }
