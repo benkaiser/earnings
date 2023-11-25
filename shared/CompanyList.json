@@ -310,5 +310,8 @@
   },
   "ZOOM": {
     "type": "post"
+  },
+  "ASD": {
+    "type": "pre"
   }
 }
