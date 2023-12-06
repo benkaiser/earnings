@@ -322,5 +322,8 @@
   },
   "GTLB": {
     "type": "post"
+  },
+  "ARM": {
+    "type": "post"
   }
 }
