@@ -325,5 +325,8 @@
   },
   "ARM": {
     "type": "post"
+  },
+  "DOCU": {
+    "type": "post"
   }
 }
