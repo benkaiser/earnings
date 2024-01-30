@@ -328,5 +328,8 @@
   },
   "DOCU": {
     "type": "post"
+  },
+  "JNPR": {
+    "type": "post"
   }
 }
