@@ -334,5 +334,8 @@
   },
   "BA": {
     "type": "pre"
+  },
+  "WDAY": {
+    "type": "post"
   }
 }
