@@ -337,5 +337,8 @@
   },
   "WDAY": {
     "type": "post"
+  },
+  "ORCL": {
+    "type": "post"
   }
 }
