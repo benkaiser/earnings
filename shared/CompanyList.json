@@ -252,7 +252,7 @@
     "type": "post"
   },
   "CRWD": {
-    "type": "post"
+    "type": "pre"
   },
   "LULU": {
     "type": "post"
