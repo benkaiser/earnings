@@ -346,5 +346,8 @@
   },
   "GOOG": {
     "type": "post"
+  },
+  "S": {
+    "type": "pre"
   }
 }
