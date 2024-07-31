@@ -343,5 +343,8 @@
   },
   "THYAO": {
     "type": "pre"
+  },
+  "GOOG": {
+    "type": "post"
   }
 }
