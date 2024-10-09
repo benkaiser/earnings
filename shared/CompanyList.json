@@ -355,5 +355,8 @@
   },
   "APLD": {
     "type": "post"
+  },
+  "DAL": {
+    "type": "pre"
   }
 }
