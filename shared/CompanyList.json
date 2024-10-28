@@ -39,7 +39,7 @@
     "type": "pre"
   },
   "AMD": {
-    "type": "post"
+    "type": "pre"
   },
   "NIO": {
     "type": "post"
