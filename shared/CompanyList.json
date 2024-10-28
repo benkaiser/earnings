@@ -361,5 +361,8 @@
   },
   "NOG": {
     "type": "pre"
+  },
+  "CROX": {
+    "type": "pre"
   }
 }
