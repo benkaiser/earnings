@@ -358,5 +358,8 @@
   },
   "DAL": {
     "type": "pre"
+  },
+  "NOG": {
+    "type": "pre"
   }
 }
