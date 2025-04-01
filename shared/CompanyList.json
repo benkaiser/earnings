@@ -364,5 +364,8 @@
   },
   "CROX": {
     "type": "pre"
+  },
+  "NOKIA": {
+    "type": "pre"
   }
 }
