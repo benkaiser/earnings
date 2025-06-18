@@ -367,5 +367,8 @@
   },
   "NOKIA": {
     "type": "pre"
+  },
+  "SAMPLE": {
+    "type": "pre"
   }
 }
