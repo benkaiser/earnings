@@ -1,6 +1,6 @@
 {
   "AAPL": {
-    "type": "post"
+    "type": "pre"
   },
   "AMZN": {
     "type": "post"
