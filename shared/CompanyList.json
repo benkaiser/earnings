@@ -370,5 +370,8 @@
   },
   "SAMPLE": {
     "type": "pre"
+  },
+  "APPL": {
+    "type": "pre"
   }
 }
